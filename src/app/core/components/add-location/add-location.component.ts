@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-add-location',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-location.component.css']
 })
 export class AddLocationComponent implements OnInit {
+    zipCode: string;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onSubmit(zipCodeForm: NgForm): void {
+    console.log(zipCodeForm.value)
+  }
 }

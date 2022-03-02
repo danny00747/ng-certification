@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
-import {CoreModule} from "./core/core.module";
+import {CoreModule} from "@app/core.module";
 
 @NgModule({
     imports:

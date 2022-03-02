@@ -4,11 +4,31 @@
             Enter a zipcode:
         </div>
         <div class="card-body">
-            <input class="form-control" placeholder="Zipcode" type="text" id="addLocation">
-            <br>
-            <button class="btn btn-primary" id="addLocationBtn">
-                Add location
-            </button>
+            <form #zipCodeForm="ngForm" (submit)="onSubmit(zipCodeForm)">
+                <input #zipCodeInput="ngModel"
+                       [class.is-invalid]="zipCodeInput.invalid && zipCodeInput.touched"
+                       [class.is-valid]="!(zipCodeInput.invalid && zipCodeInput.untouched)"
+                       pattern="^[0-9]*$"
+                       class="form-control" name="zipCode" type="text" id="addLocation"
+                       [(ngModel)]="zipCode" minlength="5" maxlength="5"
+                       placeholder="zipCode" required>
+                <div *ngIf="zipCodeInput.errors && (zipCodeInput.invalid || zipCodeInput.touched)">
+                    <small id="zipCodeError2" class="text-danger"
+                           *ngIf="zipCodeInput.errors.pattern || zipCodeInput.errors.minlength">
+                        {{zipCodeInput.value}} is not a valid zipcode
+                    </small>
+                    <small id="zipCodeError3" class="text-danger"
+                           *ngIf="zipCodeInput.errors.required && zipCodeInput.touched">
+                        A zipcode is required
+                    </small>
+                </div>
+
+                <br>
+                <button class="btn btn-primary btn-rounded text-monospace font-italic font-weight-bolder"
+                        id="addLocationBtn">
+                    Add location
+                </button>
+            </form>
         </div>
     </div>
 
