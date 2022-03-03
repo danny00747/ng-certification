@@ -5,18 +5,21 @@ import {ListLocationComponent} from './components/list-location/list-location.co
 import {FormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {LoadingInterceptor} from "@app/interceptors/loading.interceptor";
-import {WeatherService} from "@app/services/weather.service";
-import {LoadingService} from "@app/services/loading.service";
+import {WeatherService} from "@app/services";
+import {LoadingService} from "@app/services";
+import {SharedModule} from "@shared/shared.module";
+import { LocationComponent } from './components/list-location/location/location.component';
 
 
 @NgModule({
     declarations: [
         AddLocationComponent,
-        ListLocationComponent
+        ListLocationComponent,
+        LocationComponent
     ],
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule, SharedModule
     ],
     providers: [
         WeatherService,

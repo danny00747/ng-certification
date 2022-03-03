@@ -21,11 +21,19 @@
                            *ngIf="zipCodeInput.errors.required && zipCodeInput.touched">
                         A zipcode is required
                     </small>
+
                 </div>
 
                 <br>
+
+                <div id="zipCodeError4" class="alert alert-warning" role="alert"
+                       *ngIf="!(zipCodeInput.untouched) && !(zipCodeInput.value | validZipCode)">
+                    This zipcode has already been added
+                </div>
+
+
                 <button class="btn btn-primary btn-rounded text-monospace font-italic font-weight-bolder"
-                        id="addLocationBtn">
+                        id="addLocationBtn" [disabled]="!(zipCodeInput.value | validZipCode) || zipCodeInput.invalid">
                     Add location
                 </button>
             </form>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {WeatherService} from "@app/services";
 
 @Component({
   selector: 'app-list-location',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListLocationComponent implements OnInit {
 
-  constructor() { }
+  zipCodes$ = this.weatherService.getZipCodes;
+
+  constructor(private readonly weatherService: WeatherService) { }
 
   ngOnInit(): void {
   }
