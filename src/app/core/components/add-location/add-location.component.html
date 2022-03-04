@@ -28,7 +28,12 @@
 
                 <div id="zipCodeError4" class="alert alert-warning" role="alert"
                        *ngIf="!(zipCodeInput.untouched) && !(zipCodeInput.value | validZipCode)">
-                    This zipcode has already been added
+                    This zipcode has already been added !
+                </div>
+
+                <div id="zipCodeError5" class="alert alert-danger" role="alert"
+                     *ngIf="(zipCodeNotFound$ | async)">
+                    This zipcode has not been found !!
                 </div>
 
 

@@ -4,5 +4,5 @@ export enum SkyCondictionEnum {
     RAIN = 'rain',
     SNOW = 'snow',
     CLEAR = 'clear',
-    DEFAuLT = 'SUN'
+    DEFAuLT = 'sun'
 }

@@ -6,15 +6,16 @@ import {IWeatherData, Location} from "@shared/models/weather.model.";
 import {SkyCondictionEnum} from "@shared/enums/sky-condiction.enum";
 import {$enum} from 'ts-enum-util'
 import {BehaviorSubject, Observable} from "rxjs";
-import {filter, map} from "rxjs/operators";
+import {filter, map, tap} from "rxjs/operators";
 
 
 @Injectable()
 export class WeatherService extends CacheService {
 
     private readonly apiUrl: string;
-    private zipCodes$: BehaviorSubject<Array<string>>;
+    private readonly zipCodes$: BehaviorSubject<Array<string>>;
     private readonly cachedZipCodes: Array<string>;
+    private readonly zipCodeNotFound$: BehaviorSubject<string>;
 
     constructor(private readonly http: HttpClient) {
         super();
@@ -22,10 +23,19 @@ export class WeatherService extends CacheService {
         this.zipCodes$ = new BehaviorSubject<Array<string>>([]);
         this.cachedZipCodes = localStorage.getItem('zipCodes')?.split(',') ?? [];
         this.zipCodes$.next(this.cachedZipCodes);
+        this.zipCodeNotFound$ = new BehaviorSubject<string>(null);
     }
 
     get getZipCodes(): Observable<string[]> {
         return this.zipCodes$.asObservable();
+    }
+
+    get getZipCodeNotFound(): Observable<string> {
+        return this.zipCodeNotFound$.asObservable();
+    }
+
+    setZipCodeNotFound(error?: string) {
+        this.zipCodeNotFound$.next(error) ;
     }
 
     checkDuplicateZipCode(zipCode: string): boolean {
@@ -42,8 +52,8 @@ export class WeatherService extends CacheService {
         const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${environment.API_KEY}`;
         return this.http.get<IWeatherData>(url)
             .pipe(
-                filter(data => !!data),
-                map(({weather, main, name}) =>
+                filter(({weather}: IWeatherData) => !!weather),
+                map(({weather, main, name}: IWeatherData) =>
                     ({
                         name: name,
                         skyCondiction: $enum(SkyCondictionEnum).asValueOrDefault(weather[0].main.toLocaleLowerCase(), SkyCondictionEnum.DEFAuLT),
@@ -52,6 +62,7 @@ export class WeatherService extends CacheService {
                         maxTemp: main.temp_max
                     }) as unknown as Location
                 ),
+                tap(() => this.zipCodeNotFound$.next(null)),
             );
     }
 
