@@ -28,13 +28,13 @@ export class ForecastService {
         return this.http.get<IForecast>(url)
             .pipe(
                 filter(({list}) => !!list.length),
-                map(({list, city}) => this.mapLocation(list, city)),
+                map(({list, city}) => this.mapToLocation(list, city)),
                 map((locations: Location[]) => locations.map(this.convertDate)),
                 tap((locations: Location[]) => this.locations$.next(locations))
             );
     }
 
-    private mapLocation = (list: IWeatherData[], city: ICityInfo) =>
+    private mapToLocation = (list: IWeatherData[], city: ICityInfo) =>
         list.map((w: IWeatherData) => ({
             name: city.name,
             skyCondiction: $enum(SkyStatusEnum).asValueOrDefault(w.weather[0].main.toLowerCase(), SkyStatusEnum.DEFAuLT),

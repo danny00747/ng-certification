@@ -7,12 +7,10 @@ import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {$enum} from 'ts-enum-util'
 import {BehaviorSubject, Observable} from "rxjs";
 import {filter, map, tap} from "rxjs/operators";
-import {IForecast} from "../../modules/forecast/models/forecast";
 
 
 @Injectable()
 export class WeatherService extends CacheService {
-
 
     private readonly localStoragekey;
     private readonly apiUrl: string;
@@ -33,6 +31,10 @@ export class WeatherService extends CacheService {
 
     get getZipCodes(): Observable<string[]> {
         return this.zipCodes$.asObservable();
+    }
+
+    get getZipCodesValue(): string[] {
+        return this.zipCodes$.value;
     }
 
     get getZipCodeNotFound(): Observable<string> {

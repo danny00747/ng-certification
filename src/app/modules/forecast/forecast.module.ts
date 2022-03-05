@@ -3,6 +3,7 @@ import {FiveDayForecastComponent} from './components/five-day-forecast/five-day-
 import {ForecastRoutingModule} from "./forecast-routing.module";
 import {SharedModule} from "@shared/shared.module";
 import {ForecastService} from "./services/forecast.service";
+import {CanActivateGuard} from "./guards/can-activate.guard";
 
 
 @NgModule({
@@ -10,7 +11,7 @@ import {ForecastService} from "./services/forecast.service";
     imports: [
         SharedModule,
         ForecastRoutingModule
-    ], providers: [ForecastService]
+    ], providers: [ForecastService, CanActivateGuard]
 })
 export class ForecastModule {
 }
