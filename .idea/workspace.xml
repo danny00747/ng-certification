@@ -5,20 +5,91 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a115339-a992-4fdd-a904-f642df6b23b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/core/guards/can-load.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/modules/forecast/guards/can-activate.guard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-brands-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-brands-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-brands-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-brands-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-brands-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-regular-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-regular-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-regular-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-regular-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-regular-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-solid-900.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-solid-900.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-solid-900.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-solid-900.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/fa-solid-900.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/main-es2015.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/main-es2015.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/main-es5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/main-es5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/modules-forecast-forecast-module-es2015.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/modules-forecast-forecast-module-es2015.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/modules-forecast-forecast-module-es5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/modules-forecast-forecast-module-es5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/polyfills-es2015.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/polyfills-es2015.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/polyfills-es5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/polyfills-es5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/runtime-es2015.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/runtime-es2015.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/runtime-es5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/runtime-es5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/styles-es2015.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/styles-es2015.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/styles-es5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/styles-es5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/vendor-es2015.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/vendor-es2015.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/vendor-es5.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/dist/angular-certification/vendor-es5.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deploy/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/location/location.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/components/list-location/location/location.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/core.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/core.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/components/five-day-forecast/five-day-forecast.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/components/five-day-forecast/five-day-forecast.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/forecast-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/forecast-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/forecast.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/forecast.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-brands-400.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-brands-400.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-brands-400.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-brands-400.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-brands-400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-regular-400.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-regular-400.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-regular-400.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-regular-400.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-regular-400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-solid-900.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-solid-900.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-solid-900.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-solid-900.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/fa-solid-900.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es2015.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es5.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es2015.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es5.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/polyfills-es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/polyfills-es2015.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/polyfills-es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/polyfills-es5.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/runtime-es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/runtime-es2015.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/runtime-es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/runtime-es5.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/styles-es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/styles-es2015.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/styles-es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/styles-es5.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/vendor-es2015.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/vendor-es2015.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/vendor-es5.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/vendor-es5.js.map" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +167,7 @@
       <workItem from="1646259175753" duration="2753000" />
       <workItem from="1646262077213" duration="1349000" />
       <workItem from="1646303187704" duration="17945000" />
-      <workItem from="1646395891127" duration="51469000" />
+      <workItem from="1646395891127" duration="52459000" />
     </task>
     <servers />
   </component>
