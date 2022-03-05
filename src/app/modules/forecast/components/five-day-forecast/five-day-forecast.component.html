@@ -1,0 +1,25 @@
+<h4 class="container">Template for 5-day forecast page:</h4>
+<div class="container-fluid container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">5-day forecast for Rancho Cordova</h3>
+
+        </div>
+        <ul class="list-group">
+
+            <li class="list-group-item" *ngFor='let location of locations$ | async'>
+                {{ location?.date | date:'EEEE, MMM d' }}:
+                {{ location?.skyCondiction | titlecase }}
+                - Min: {{ location?.minTemp | number : '1.0-0' }}
+                - Max: {{ location?.maxTemp | number : '1.0-0' }}
+                <app-weather-icon [icon]="true" [skyCondition]="location.skyCondiction | weatherStatus">
+                </app-weather-icon>
+            </li>
+        </ul>
+    </div>
+    <br>
+    <button [routerLink]="['/']" class="btn btn-success">
+        <i class="fa fa-arrow-left fa-arrow"></i>
+        Back to main page
+    </button>
+</div>

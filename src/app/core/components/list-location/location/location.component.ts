@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Location} from "@shared/models/weather.model.";
 import {WeatherService} from "@app/services";
 import {HttpErrorResponse} from "@angular/common/http";
+import {filter} from "rxjs/operators";
 
 @Component({
     selector: 'app-location',
@@ -22,10 +23,13 @@ export class LocationComponent implements OnInit {
             .subscribe(
                 (data: Location) => this.data = data,
                 (error: HttpErrorResponse) => {
-                    this.weatherService.setZipCodeNotFound(error.message);
-                    setTimeout(() => this.weatherService.setZipCodeNotFound(), 2000);
+                        this.weatherService.setZipCodeNotFound(error.message);
+                        setTimeout(() => this.weatherService.setZipCodeNotFound(), 2000);
                 }
             );
     }
 
+    removeLocation() {
+        this.weatherService.removeZipCode(this.zipCode);
+    }
 }

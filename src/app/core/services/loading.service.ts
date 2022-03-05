@@ -5,32 +5,28 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class LoadingService {
 
-  private _requests: HttpRequest<any>[];
+  private requests: HttpRequest<any>[];
 
   constructor() {
-    this._isLoading$ = new BehaviorSubject<boolean>(false);
-    this._requests = [];
+    this.isLoading$ = new BehaviorSubject<boolean>(false);
+    this.requests = [];
   }
 
-  private _isLoading$: BehaviorSubject<boolean>;
+  private isLoading$: BehaviorSubject<boolean>;
 
-  get isLoading$(): Observable<boolean> {
-    return this._isLoading$.asObservable();
-  }
-
-  get isLoading(): boolean {
-    return this._isLoading$.value;
+  get isLoading(): Observable<boolean> {
+    return this.isLoading$.asObservable();
   }
 
   start(req: HttpRequest<any>) {
-    this._requests.push(req);
-    this._isLoading$.next(true);
+    this.requests.push(req);
+    this.isLoading$.next(true);
   }
 
   stop(req: HttpRequest<any>) {
-    this._requests.splice(this._requests.indexOf(req), 1);
-    if (this._requests.length === 0) {
-      this._isLoading$.next(false);
+    this.requests.splice(this.requests.indexOf(req), 1);
+    if (this.requests.length === 0) {
+      this.isLoading$.next(false);
     }
   }
 }

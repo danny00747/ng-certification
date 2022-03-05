@@ -1,8 +1,19 @@
-import {SkyCondictionEnum} from "@shared/enums/sky-condiction.enum";
+import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 
 export interface ICoord {
     lon: string;
     lat: string;
+}
+
+export interface ICityInfo {
+    id: number;
+    name: string;
+    coord: ICoord;
+    country: string;
+    population: number;
+    timezone: number;
+    sunrise: number;
+    sunset: number;
 }
 
 export interface IWeather {
@@ -73,7 +84,7 @@ export interface IWeatherData {
 
 export interface Location {
     name: string;
-    skyCondiction: SkyCondictionEnum;
+    skyCondiction: SkyStatusEnum;
     currentTemp?: number;
     maxTemp: number;
     minTemp: number;

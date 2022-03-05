@@ -3,15 +3,18 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
 import {CacheService} from "@app/classes/cache.service";
 import {IWeatherData, Location} from "@shared/models/weather.model.";
-import {SkyCondictionEnum} from "@shared/enums/sky-condiction.enum";
+import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {$enum} from 'ts-enum-util'
 import {BehaviorSubject, Observable} from "rxjs";
 import {filter, map, tap} from "rxjs/operators";
+import {IForecast} from "../../modules/forecast/models/forecast";
 
 
 @Injectable()
 export class WeatherService extends CacheService {
 
+
+    private readonly localStoragekey;
     private readonly apiUrl: string;
     private readonly zipCodes$: BehaviorSubject<Array<string>>;
     private readonly cachedZipCodes: Array<string>;
@@ -19,9 +22,11 @@ export class WeatherService extends CacheService {
 
     constructor(private readonly http: HttpClient) {
         super();
+
+        this.localStoragekey = 'ZIPCODES';
         this.apiUrl = environment.API_URL;
         this.zipCodes$ = new BehaviorSubject<Array<string>>([]);
-        this.cachedZipCodes = localStorage.getItem('zipCodes')?.split(',') ?? [];
+        this.cachedZipCodes = this.getItem(this.localStoragekey)?.split(',') ?? [];
         this.zipCodes$.next(this.cachedZipCodes);
         this.zipCodeNotFound$ = new BehaviorSubject<string>(null);
     }
@@ -34,8 +39,14 @@ export class WeatherService extends CacheService {
         return this.zipCodeNotFound$.asObservable();
     }
 
+    removeZipCode(zipcode: string) {
+        this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
+        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+        this.zipCodes$.next(this.cachedZipCodes);
+    }
+
     setZipCodeNotFound(error?: string) {
-        this.zipCodeNotFound$.next(error) ;
+        this.zipCodeNotFound$.next(error);
     }
 
     checkDuplicateZipCode(zipCode: string): boolean {
@@ -44,7 +55,7 @@ export class WeatherService extends CacheService {
 
     addZipCode(zipCode: string): void {
         this.cachedZipCodes.push(zipCode);
-        this.setItem('zipCodes', this.cachedZipCodes.toString());
+        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
         this.zipCodes$.next(this.cachedZipCodes);
     }
 
@@ -56,7 +67,7 @@ export class WeatherService extends CacheService {
                 map(({weather, main, name}: IWeatherData) =>
                     ({
                         name: name,
-                        skyCondiction: $enum(SkyCondictionEnum).asValueOrDefault(weather[0].main.toLocaleLowerCase(), SkyCondictionEnum.DEFAuLT),
+                        skyCondiction: $enum(SkyStatusEnum).asValueOrDefault(weather[0].main.toLocaleLowerCase(), SkyStatusEnum.DEFAuLT),
                         currentTemp: main.temp,
                         minTemp: main.temp_min,
                         maxTemp: main.temp_max
@@ -65,6 +76,5 @@ export class WeatherService extends CacheService {
                 tap(() => this.zipCodeNotFound$.next(null)),
             );
     }
-
 
 }

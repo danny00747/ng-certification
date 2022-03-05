@@ -5,17 +5,17 @@
             <h4>Current conditions: {{data.skyCondiction | titlecase}}</h4>
             <h4>Temperatures today:</h4>
             <p>
-                Current {{ data?.currentTemp | number : '1.0-0'}}
-                - Max {{ data?.maxTemp | number : '1.0-0'}}
-                - Min {{ data?.minTemp | number : '1.0-0'}}
+                Current {{ data.currentTemp | number : '1.0-0'}}
+                - Max {{ data.maxTemp | number : '1.0-0'}}
+                - Min {{ data.minTemp | number : '1.0-0'}}
             </p>
             <p>
-                <a href="/forecast/95742">Show 5-day forecast for {{ data.name }}</a>
+                <a [routerLink]="['/forecast', zipCode]">Show 5-day forecast for {{ data.name }}</a>
             </p>
         </div>
         <div>
-            <span class="close">×</span>
-            <img src="https://www.angulartraining.com/images/weather/sun.png">
+            <button (click)="removeLocation()" class="close">×</button>
+            <app-weather-icon [icon]="false" [skyCondition]="data.skyCondiction | weatherStatus"></app-weather-icon>
         </div>
     </div>
     <hr>

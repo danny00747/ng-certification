@@ -9,6 +9,10 @@ const routes: Routes = [
     component: AddLocationComponent
   },
   {
+    path: 'forecast',
+    loadChildren: () => import('./modules/forecast/forecast.module').then(m => m.ForecastModule)
+  },
+  {
     path: '**',
     redirectTo: '/'
   }

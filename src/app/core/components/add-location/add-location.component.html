@@ -27,7 +27,7 @@
                 <br>
 
                 <div id="zipCodeError4" class="alert alert-warning" role="alert"
-                       *ngIf="!(zipCodeInput.untouched) && !(zipCodeInput.value | validZipCode)">
+                     *ngIf="!(zipCodeInput.untouched) && !(zipCodeInput.value | validZipCode)">
                     This zipcode has already been added !
                 </div>
 
@@ -38,8 +38,9 @@
 
 
                 <button class="btn btn-primary btn-rounded text-monospace font-italic font-weight-bolder"
-                        id="addLocationBtn" [disabled]="!(zipCodeInput.value | validZipCode) || zipCodeInput.invalid">
+                        [disabled]="!(zipCodeInput.value | validZipCode) || zipCodeInput.invalid">
                     Add location
+                    <i *ngIf="loading$ | async" class="fa fa-spinner fa-spin"></i>
                 </button>
             </form>
         </div>

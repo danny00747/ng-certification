@@ -1,6 +1,6 @@
 export abstract class CacheService {
-    protected getItem(key: string): string | null {
-        return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)) : null;
+    protected getItem(key: string): string {
+        return localStorage.getItem(key);
     }
 
     protected setItem(key: string, data: object | string) {
