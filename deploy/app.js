@@ -19,4 +19,4 @@ app.get('*', (req, res) => {
         .join(__dirname + '/dist', 'angular-certification', 'index.html'));
 });
 
-app.listen(3000, () => console.log('server started !'));
+app.listen(process.env.PORT, () => console.log('server started !'));
