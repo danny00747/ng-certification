@@ -4,7 +4,6 @@ const path = require('path');
 // Initialize the app
 const app = express();
 
-
 // set the static folder
 app.use(express.static(path.join(__dirname, 'dist', 'angular-certification')));
 
