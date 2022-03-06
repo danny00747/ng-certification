@@ -8,10 +8,10 @@
         <ul class="list-group">
 
             <li class="list-group-item" *ngFor='let location of locations$ | async'>
-                {{ location?.date | date:'EEEE, MMM d' }}:
-                {{ location?.skyCondiction | titlecase }}
-                - Min: {{ location?.minTemp | number : '1.0-0' }}
-                - Max: {{ location?.maxTemp | number : '1.0-0' }}
+                {{ location.date | convertDate }}:
+                {{ location.skyCondiction | titlecase }}
+                - Min: {{ location.minTemp | number : '1.0-0' }}
+                - Max: {{ location.maxTemp | number : '1.0-0' }}
                 <app-weather-icon [icon]="true" [skyCondition]="location.skyCondiction | weatherStatus">
                 </app-weather-icon>
             </li>

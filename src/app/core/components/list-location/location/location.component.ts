@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Location} from "@shared/models/weather.model.";
+import {LocationDTO} from "@shared/models";
 import {WeatherService} from "@app/services";
 import {HttpErrorResponse} from "@angular/common/http";
 
@@ -12,7 +12,7 @@ export class LocationComponent implements OnInit {
 
 
     @Input() zipCode: string;
-    data: Location;
+    locationDTO: LocationDTO;
 
     constructor(private readonly weatherService: WeatherService) {
     }
@@ -20,18 +20,15 @@ export class LocationComponent implements OnInit {
     ngOnInit(): void {
         this.weatherService.getLocationByZipCode(this.zipCode)
             .subscribe(
-                (data: Location) => this.data = data,
+                (data: LocationDTO) => this.locationDTO = data,
                 (error: HttpErrorResponse) => {
-                        this.weatherService.setZipCodeNotFound(error.message);
-                        setTimeout(() => this.weatherService.setZipCodeNotFound(), 2000);
+                    this.weatherService.setZipCodeNotFound(error.message);
+                    setTimeout(() => this.weatherService.setZipCodeNotFound(), 2000);
                 }
             );
-
-        const t = this.weatherService.getZipCodesValue;
-        console.log(t);
     }
 
-    removeLocation() {
+    removeLocation(): void {
         this.weatherService.removeZipCode(this.zipCode);
     }
 }

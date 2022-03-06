@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ForecastService} from "../../services/forecast.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {catchError, filter, switchMap, tap} from "rxjs/operators";
+import {catchError, filter, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-five-day-forecast',

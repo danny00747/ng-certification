@@ -5,9 +5,10 @@ import {WeatherIconComponent} from './components/weather-icon/weather-icon.compo
 import {WeatherStatusPipe} from './pipes/weather-status.pipe';
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
+import {ConvertDatePipe} from './pipes/convert-date.pipe';
 
 @NgModule({
-    declarations: [ValidZipCodePipe, WeatherIconComponent, WeatherStatusPipe],
+    declarations: [ValidZipCodePipe, WeatherIconComponent, WeatherStatusPipe, ConvertDatePipe],
     imports: [
         CommonModule,
         HttpClientModule,
@@ -17,6 +18,7 @@ import {RouterModule} from "@angular/router";
         HttpClientModule,
         RouterModule,
         ValidZipCodePipe,
+        ConvertDatePipe,
         WeatherIconComponent,
         WeatherStatusPipe
     ]

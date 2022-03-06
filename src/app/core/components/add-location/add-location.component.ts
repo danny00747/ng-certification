@@ -1,7 +1,6 @@
-import {AfterContentInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {LoadingService, WeatherService} from "@app/services";
-import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-add-location',

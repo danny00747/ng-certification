@@ -7,12 +7,12 @@ export class LoadingService {
 
   private requests: HttpRequest<any>[];
 
+  private isLoading$: BehaviorSubject<boolean>;
+
   constructor() {
     this.isLoading$ = new BehaviorSubject<boolean>(false);
     this.requests = [];
   }
-
-  private isLoading$: BehaviorSubject<boolean>;
 
   get isLoading(): Observable<boolean> {
     return this.isLoading$.asObservable();

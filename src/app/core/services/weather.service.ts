@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
 import {CacheService} from "@app/classes/cache.service";
-import {IWeatherData, Location} from "@shared/models/weather.model.";
+import {FullWeatherDTO, LocationDTO, MainWeatherDTO, WeatherDTO} from "@shared/models";
 import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {$enum} from 'ts-enum-util'
 import {BehaviorSubject, Observable} from "rxjs";
@@ -12,7 +12,7 @@ import {filter, map, tap} from "rxjs/operators";
 @Injectable()
 export class WeatherService extends CacheService {
 
-    private readonly localStoragekey;
+    private readonly localStoragekey: string;
     private readonly apiUrl: string;
     private readonly zipCodes$: BehaviorSubject<Array<string>>;
     private readonly cachedZipCodes: Array<string>;
@@ -43,8 +43,9 @@ export class WeatherService extends CacheService {
 
     removeZipCode(zipcode: string) {
         this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
-        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+        this.removeValue(this.localStoragekey, zipcode);
         this.zipCodes$.next(this.cachedZipCodes);
+
     }
 
     setZipCodeNotFound(error?: string) {
@@ -61,22 +62,21 @@ export class WeatherService extends CacheService {
         this.zipCodes$.next(this.cachedZipCodes);
     }
 
-    getLocationByZipCode(zipCode: string): Observable<Location> {
+    getLocationByZipCode(zipCode: string): Observable<LocationDTO> {
         const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${environment.API_KEY}`;
-        return this.http.get<IWeatherData>(url)
+        return this.http.get<FullWeatherDTO>(url)
             .pipe(
-                filter(({weather}: IWeatherData) => !!weather),
-                map(({weather, main, name}: IWeatherData) =>
-                    ({
-                        name: name,
-                        skyCondiction: $enum(SkyStatusEnum).asValueOrDefault(weather[0].main.toLocaleLowerCase(), SkyStatusEnum.DEFAuLT),
-                        currentTemp: main.temp,
-                        minTemp: main.temp_min,
-                        maxTemp: main.temp_max
-                    }) as unknown as Location
-                ),
-                tap(() => this.zipCodeNotFound$.next(null)),
-            );
+                filter(({weather}: FullWeatherDTO) => !!weather),
+                map(({weather, main, name}) => this.mapToLocationDTO(weather, main, name)));
     }
+
+    private mapToLocationDTO = (weather: WeatherDTO[], main: MainWeatherDTO, name: string) =>
+        ({
+            name: name,
+            skyCondiction: $enum(SkyStatusEnum).asValueOrDefault(weather[0].main.toLocaleLowerCase(), SkyStatusEnum.DEFAuLT),
+            currentTemp: main.temp,
+            minTemp: main.temp_min,
+            maxTemp: main.temp_max
+        }) as unknown as LocationDTO;
 
 }

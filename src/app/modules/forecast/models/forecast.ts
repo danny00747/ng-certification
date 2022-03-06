@@ -1,9 +1,10 @@
-import {ICityInfo, IWeatherData} from "@shared/models/weather.model.";
+import {FullWeatherDTO} from "@shared/models/weather.model.";
+import {CityDTO} from "@shared/models/city";
 
-export interface IForecast {
+export interface ForecastDTO {
     cod: string;
     message: number;
     cnt: number;
-    list: Array<IWeatherData>;
-    city: ICityInfo;
+    list: FullWeatherDTO[];
+    city: CityDTO;
 }

@@ -11,6 +11,12 @@ export abstract class CacheService {
         localStorage.removeItem(key)
     }
 
+    protected removeValue(key: string, value: string) {
+        const items =  this.getItem(key).split(',');
+        items.splice(items.indexOf(value, 1));
+        this.setItem(key, items.toString());
+    }
+
     protected clear() {
         localStorage.clear()
     }
