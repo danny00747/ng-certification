@@ -168,26 +168,15 @@
 
           this.http = http;
 
-          this.mapToLocation = function (list, city) {
+          this.mapToLocationDTO = function (list, city) {
             return list.map(function (w) {
               return {
                 name: city.name,
                 skyCondiction: Object(ts_enum_util__WEBPACK_IMPORTED_MODULE_4__["$enum"])(_shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_5__["SkyStatusEnum"]).asValueOrDefault(w.weather[0].main.toLowerCase(), _shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_5__["SkyStatusEnum"].DEFAuLT),
-                currentTemp: w.temp.min,
                 minTemp: w.temp.min,
                 maxTemp: w.temp.max,
                 date: w.dt
               };
-            });
-          };
-
-          this.convertDate = function (location) {
-            return Object.assign(Object.assign({}, location), {
-              date: new Date(new Date(location.date).getTime() * 1000).toLocaleString("us", {
-                day: "2-digit",
-                weekday: "long",
-                month: "short"
-              })
             });
           };
 
@@ -205,16 +194,14 @@
           value: function getFiveDayForecastByZipCode(zipCode) {
             var _this = this;
 
-            var url = "".concat(this.apiUrl, "forecast/daily?cnt=5&zip=").concat(zipCode, ",us&appid=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY);
+            var url = "".concat(this.apiUrl, "forecast/daily?cnt=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].NUMBER_OF_DAYS, "&zip=").concat(zipCode, ",us&appid=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY);
             return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (_ref) {
               var list = _ref.list;
               return !!list.length;
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref2) {
               var list = _ref2.list,
                   city = _ref2.city;
-              return _this.mapToLocation(list, city);
-            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (locations) {
-              return locations.map(_this.convertDate);
+              return _this.mapToLocationDTO(list, city);
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (locations) {
               return _this.locations$.next(locations);
             }));
@@ -305,7 +292,13 @@
       /* harmony import */
 
 
-      var _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _shared_pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../../../../shared/pipes/convert-date.pipe */
+      "J6lF");
+      /* harmony import */
+
+
+      var _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ../../../../shared/pipes/weather-status.pipe */
       "hQe8");
 
@@ -315,7 +308,7 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "date");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "convertDate");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](3, "titlecase");
 
@@ -335,11 +328,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate4"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](2, 6, location_r1 == null ? null : location_r1.date, "EEEE, MMM d"), ": ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](3, 9, location_r1 == null ? null : location_r1.skyCondiction), " - Min: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](4, 11, location_r1 == null ? null : location_r1.minTemp, "1.0-0"), " - Max: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](5, 14, location_r1 == null ? null : location_r1.maxTemp, "1.0-0"), " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate4"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 6, location_r1.date), ": ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](3, 8, location_r1.skyCondiction), " - Min: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](4, 10, location_r1.minTemp, "1.0-0"), " - Max: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](5, 13, location_r1.maxTemp, "1.0-0"), " ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("icon", true)("skyCondition", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](7, 17, location_r1.skyCondiction));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("icon", true)("skyCondition", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](7, 16, location_r1.skyCondiction));
         }
       }
 
@@ -409,7 +402,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "ul", 5);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, FiveDayForecastComponent_li_8_Template, 8, 19, "li", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, FiveDayForecastComponent_li_8_Template, 8, 18, "li", 6);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](9, "async");
 
@@ -441,7 +434,7 @@
           }
         },
         directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_5__["WeatherIconComponent"]],
-        pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["AsyncPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DecimalPipe"], _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_6__["WeatherStatusPipe"]],
+        pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["AsyncPipe"], _shared_pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_6__["ConvertDatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DecimalPipe"], _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_7__["WeatherStatusPipe"]],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvZm9yZWNhc3QvY29tcG9uZW50cy9maXZlLWRheS1mb3JlY2FzdC9maXZlLWRheS1mb3JlY2FzdC5jb21wb25lbnQuY3NzIn0= */"]
       });
       /*@__PURE__*/

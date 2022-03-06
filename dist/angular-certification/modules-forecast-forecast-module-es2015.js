@@ -74,19 +74,13 @@ __webpack_require__.r(__webpack_exports__);
 class ForecastService {
     constructor(http) {
         this.http = http;
-        this.mapToLocation = (list, city) => list.map((w) => ({
+        this.mapToLocationDTO = (list, city) => list.map((w) => ({
             name: city.name,
             skyCondiction: Object(ts_enum_util__WEBPACK_IMPORTED_MODULE_4__["$enum"])(_shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_5__["SkyStatusEnum"]).asValueOrDefault(w.weather[0].main.toLowerCase(), _shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_5__["SkyStatusEnum"].DEFAuLT),
-            currentTemp: w.temp.min,
             minTemp: w.temp.min,
             maxTemp: w.temp.max,
             date: w.dt,
         }));
-        this.convertDate = (location) => (Object.assign(Object.assign({}, location), { date: new Date(new Date(location.date).getTime() * 1000).toLocaleString("us", {
-                day: "2-digit",
-                weekday: "long",
-                month: "short",
-            }) }));
         this.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
         this.locations$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"]([]);
     }
@@ -94,9 +88,9 @@ class ForecastService {
         return this.locations$.asObservable();
     }
     getFiveDayForecastByZipCode(zipCode) {
-        const url = `${this.apiUrl}forecast/daily?cnt=5&zip=${zipCode},us&appid=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY}`;
+        const url = `${this.apiUrl}forecast/daily?cnt=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].NUMBER_OF_DAYS}&zip=${zipCode},us&appid=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY}`;
         return this.http.get(url)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(({ list }) => !!list.length), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(({ list, city }) => this.mapToLocation(list, city)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])((locations) => locations.map(this.convertDate)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((locations) => this.locations$.next(locations)));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(({ list }) => !!list.length), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(({ list, city }) => this.mapToLocationDTO(list, city)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])((locations) => this.locations$.next(locations)));
     }
 }
 ForecastService.ɵfac = function ForecastService_Factory(t) { return new (t || ForecastService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClient"])); };
@@ -124,7 +118,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "ofXK");
 /* harmony import */ var _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../shared/components/weather-icon/weather-icon.component */ "cJ/H");
-/* harmony import */ var _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared/pipes/weather-status.pipe */ "hQe8");
+/* harmony import */ var _shared_pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../shared/pipes/convert-date.pipe */ "J6lF");
+/* harmony import */ var _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../shared/pipes/weather-status.pipe */ "hQe8");
+
 
 
 
@@ -136,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 function FiveDayForecastComponent_li_8_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 9);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "date");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "convertDate");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](3, "titlecase");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](4, "number");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](5, "number");
@@ -146,9 +142,9 @@ function FiveDayForecastComponent_li_8_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     const location_r1 = ctx.$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate4"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](2, 6, location_r1 == null ? null : location_r1.date, "EEEE, MMM d"), ": ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](3, 9, location_r1 == null ? null : location_r1.skyCondiction), " - Min: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](4, 11, location_r1 == null ? null : location_r1.minTemp, "1.0-0"), " - Max: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](5, 14, location_r1 == null ? null : location_r1.maxTemp, "1.0-0"), " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate4"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 6, location_r1.date), ": ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](3, 8, location_r1.skyCondiction), " - Min: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](4, 10, location_r1.minTemp, "1.0-0"), " - Max: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](5, 13, location_r1.maxTemp, "1.0-0"), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("icon", true)("skyCondition", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](7, 17, location_r1.skyCondiction));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("icon", true)("skyCondition", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](7, 16, location_r1.skyCondiction));
 } }
 const _c0 = function () { return ["/"]; };
 class FiveDayForecastComponent {
@@ -175,7 +171,7 @@ FiveDayForecastComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "ul", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, FiveDayForecastComponent_li_8_Template, 8, 19, "li", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, FiveDayForecastComponent_li_8_Template, 8, 18, "li", 6);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](9, "async");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -190,7 +186,7 @@ FiveDayForecastComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ�
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](9, 2, ctx.locations$));
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c0));
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_5__["WeatherIconComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["AsyncPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DecimalPipe"], _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_6__["WeatherStatusPipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvZm9yZWNhc3QvY29tcG9uZW50cy9maXZlLWRheS1mb3JlY2FzdC9maXZlLWRheS1mb3JlY2FzdC5jb21wb25lbnQuY3NzIn0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"], _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_5__["WeatherIconComponent"]], pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["AsyncPipe"], _shared_pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_6__["ConvertDatePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DecimalPipe"], _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_7__["WeatherStatusPipe"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvZm9yZWNhc3QvY29tcG9uZW50cy9maXZlLWRheS1mb3JlY2FzdC9maXZlLWRheS1mb3JlY2FzdC5jb21wb25lbnQuY3NzIn0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](FiveDayForecastComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{

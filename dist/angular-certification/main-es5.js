@@ -618,6 +618,196 @@
     },
 
     /***/
+    "J6lF":
+    /*!***************************************************!*\
+      !*** ./src/app/shared/pipes/convert-date.pipe.ts ***!
+      \***************************************************/
+
+    /*! exports provided: ConvertDatePipe */
+
+    /***/
+    function J6lF(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ConvertDatePipe", function () {
+        return ConvertDatePipe;
+      });
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+
+      var ConvertDatePipe = /*#__PURE__*/function () {
+        function ConvertDatePipe() {
+          _classCallCheck(this, ConvertDatePipe);
+        }
+
+        _createClass(ConvertDatePipe, [{
+          key: "transform",
+          value: function transform(value) {
+            return new Date(value * 1000).toLocaleString('en-US', {
+              day: '2-digit',
+              weekday: 'long',
+              month: 'short'
+            });
+          }
+        }]);
+
+        return ConvertDatePipe;
+      }();
+
+      ConvertDatePipe.ɵfac = function ConvertDatePipe_Factory(t) {
+        return new (t || ConvertDatePipe)();
+      };
+
+      ConvertDatePipe.ɵpipe = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({
+        name: "convertDate",
+        type: ConvertDatePipe,
+        pure: true
+      });
+      /*@__PURE__*/
+
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ConvertDatePipe, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"],
+          args: [{
+            name: 'convertDate'
+          }]
+        }], null, null);
+      })();
+      /***/
+
+    },
+
+    /***/
+    "Nlor":
+    /*!********************************************************!*\
+      !*** ./src/app/core/interceptors/error.interceptor.ts ***!
+      \********************************************************/
+
+    /*! exports provided: ErrorInterceptor */
+
+    /***/
+    function Nlor(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "ErrorInterceptor", function () {
+        return ErrorInterceptor;
+      });
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var _app_classes_cache_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @app/classes/cache.service */
+      "Omcj");
+      /* harmony import */
+
+
+      var _app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @app/services */
+      "dJ3e");
+
+      var ErrorInterceptor = /*#__PURE__*/function (_app_classes_cache_se) {
+        _inherits(ErrorInterceptor, _app_classes_cache_se);
+
+        var _super = _createSuper(ErrorInterceptor);
+
+        function ErrorInterceptor(weatherService) {
+          var _this;
+
+          _classCallCheck(this, ErrorInterceptor);
+
+          _this = _super.call(this);
+          _this.weatherService = weatherService;
+          return _this;
+        }
+
+        _createClass(ErrorInterceptor, [{
+          key: "intercept",
+          value: function intercept(request, next) {
+            var _this2 = this;
+
+            if (request.url.includes('/weather')) {
+              return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (event) {
+                return event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpResponse"] && event.status === 200;
+              }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
+                return _this2.weatherService.setZipCodeNotFound(null);
+              }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
+                if (err.status === 404) {
+                  var zipCode = request.url.split('zip=')[1].substring(0, 5);
+
+                  _this2.weatherService.removeZipCode(zipCode);
+                }
+
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(err);
+              }));
+            } else {
+              return next.handle(request);
+            }
+          }
+        }]);
+
+        return ErrorInterceptor;
+      }(_app_classes_cache_service__WEBPACK_IMPORTED_MODULE_4__["CacheService"]);
+
+      ErrorInterceptor.ɵfac = function ErrorInterceptor_Factory(t) {
+        return new (t || ErrorInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_app_services__WEBPACK_IMPORTED_MODULE_5__["WeatherService"]));
+      };
+
+      ErrorInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+        token: ErrorInterceptor,
+        factory: ErrorInterceptor.ɵfac
+      });
+      /*@__PURE__*/
+
+      (function () {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ErrorInterceptor, [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"]
+        }], function () {
+          return [{
+            type: _app_services__WEBPACK_IMPORTED_MODULE_5__["WeatherService"]
+          }];
+        }, null);
+      })();
+      /***/
+
+    },
+
+    /***/
     "Omcj":
     /*!***********************************************!*\
       !*** ./src/app/core/classes/cache.service.ts ***!
@@ -656,6 +846,13 @@
           key: "removeItem",
           value: function removeItem(key) {
             localStorage.removeItem(key);
+          }
+        }, {
+          key: "removeValue",
+          value: function removeValue(key, value) {
+            var items = this.getItem(key).split(',');
+            items.splice(items.indexOf(value, 1));
+            this.setItem(key, items.toString());
           }
         }, {
           key: "clear",
@@ -731,6 +928,12 @@
       var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/router */
       "tyNb");
+      /* harmony import */
+
+
+      var _pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ./pipes/convert-date.pipe */
+      "J6lF");
 
       var SharedModule = /*#__PURE__*/_createClass(function SharedModule() {
         _classCallCheck(this, SharedModule);
@@ -748,9 +951,9 @@
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](SharedModule, {
-          declarations: [_pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"]],
+          declarations: [_pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"], _pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_7__["ConvertDatePipe"]],
           imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"]],
-          exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"], _pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"]]
+          exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"], _pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_7__["ConvertDatePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"]]
         });
       })();
       /*@__PURE__*/
@@ -760,9 +963,9 @@
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](SharedModule, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
           args: [{
-            declarations: [_pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"]],
+            declarations: [_pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"], _pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_7__["ConvertDatePipe"]],
             imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"]],
-            exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"], _pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"]]
+            exports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"], _pipes_valid_zip_code_pipe__WEBPACK_IMPORTED_MODULE_2__["ValidZipCodePipe"], _pipes_convert_date_pipe__WEBPACK_IMPORTED_MODULE_7__["ConvertDatePipe"], _components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_3__["WeatherIconComponent"], _pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_4__["WeatherStatusPipe"]]
           }]
         }], null, null);
       })();
@@ -818,11 +1021,11 @@
         _createClass(LoadingInterceptor, [{
           key: "intercept",
           value: function intercept(req, next) {
-            var _this = this;
+            var _this3 = this;
 
             this.loadingService.start(req);
             return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["delay"])(300), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["finalize"])(function () {
-              return _this.loadingService.stop(req);
+              return _this3.loadingService.stop(req);
             }));
           }
         }]);
@@ -1078,29 +1281,40 @@
       /*! @angular/common/http */
       "tk/3");
 
-      var WeatherService = /*#__PURE__*/function (_app_classes_cache_se) {
-        _inherits(WeatherService, _app_classes_cache_se);
+      var WeatherService = /*#__PURE__*/function (_app_classes_cache_se2) {
+        _inherits(WeatherService, _app_classes_cache_se2);
 
-        var _super = _createSuper(WeatherService);
+        var _super2 = _createSuper(WeatherService);
 
         function WeatherService(http) {
-          var _this2;
+          var _this4;
 
           _classCallCheck(this, WeatherService);
 
           var _a, _b;
 
-          _this2 = _super.call(this);
-          _this2.http = http;
-          _this2.localStoragekey = 'ZIPCODES';
-          _this2.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
-          _this2.zipCodes$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
-          _this2.cachedZipCodes = (_b = (_a = _this2.getItem(_this2.localStoragekey)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
+          _this4 = _super2.call(this);
+          _this4.http = http;
 
-          _this2.zipCodes$.next(_this2.cachedZipCodes);
+          _this4.mapToLocationDTO = function (weather, main, name) {
+            return {
+              name: name,
+              skyCondiction: Object(ts_enum_util__WEBPACK_IMPORTED_MODULE_4__["$enum"])(_shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_3__["SkyStatusEnum"]).asValueOrDefault(weather[0].main.toLocaleLowerCase(), _shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_3__["SkyStatusEnum"].DEFAuLT),
+              currentTemp: main.temp,
+              minTemp: main.temp_min,
+              maxTemp: main.temp_max
+            };
+          };
 
-          _this2.zipCodeNotFound$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](null);
-          return _this2;
+          _this4.localStoragekey = 'ZIPCODES';
+          _this4.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
+          _this4.zipCodes$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
+          _this4.cachedZipCodes = (_b = (_a = _this4.getItem(_this4.localStoragekey)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
+
+          _this4.zipCodes$.next(_this4.cachedZipCodes);
+
+          _this4.zipCodeNotFound$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](null);
+          return _this4;
         }
 
         _createClass(WeatherService, [{
@@ -1122,7 +1336,7 @@
           key: "removeZipCode",
           value: function removeZipCode(zipcode) {
             this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
-            this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+            this.removeValue(this.localStoragekey, zipcode);
             this.zipCodes$.next(this.cachedZipCodes);
           }
         }, {
@@ -1145,7 +1359,7 @@
         }, {
           key: "getLocationByZipCode",
           value: function getLocationByZipCode(zipCode) {
-            var _this3 = this;
+            var _this5 = this;
 
             var url = "".concat(this.apiUrl, "weather?zip=").concat(zipCode, ",us&appid=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY);
             return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(function (_ref) {
@@ -1155,15 +1369,7 @@
               var weather = _ref2.weather,
                   main = _ref2.main,
                   name = _ref2.name;
-              return {
-                name: name,
-                skyCondiction: Object(ts_enum_util__WEBPACK_IMPORTED_MODULE_4__["$enum"])(_shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_3__["SkyStatusEnum"]).asValueOrDefault(weather[0].main.toLocaleLowerCase(), _shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_3__["SkyStatusEnum"].DEFAuLT),
-                currentTemp: main.temp,
-                minTemp: main.temp_min,
-                maxTemp: main.temp_max
-              };
-            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["tap"])(function () {
-              return _this3.zipCodeNotFound$.next(null);
+              return _this5.mapToLocationDTO(weather, main, name);
             }));
           }
         }]);
@@ -1570,15 +1776,15 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", ctx_r0.data.name, " (", ctx_r0.zipCode, ")");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", ctx_r0.locationDTO.name, " (", ctx_r0.zipCode, ")");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Current conditions: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](7, 10, ctx_r0.data.skyCondiction), "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Current conditions: ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](7, 10, ctx_r0.locationDTO.skyCondiction), "");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate3"](" Current ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](12, 12, ctx_r0.data.currentTemp, "1.0-0"), " - Max ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](13, 15, ctx_r0.data.maxTemp, "1.0-0"), " - Min ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](14, 18, ctx_r0.data.minTemp, "1.0-0"), " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate3"](" Current ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](12, 12, ctx_r0.locationDTO.currentTemp, "1.0-0"), " - Max ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](13, 15, ctx_r0.locationDTO.maxTemp, "1.0-0"), " - Min ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind2"](14, 18, ctx_r0.locationDTO.minTemp, "1.0-0"), " ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
@@ -1586,11 +1792,11 @@
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Show 5-day forecast for ", ctx_r0.data.name, "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Show 5-day forecast for ", ctx_r0.locationDTO.name, "");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("icon", false)("skyCondition", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](22, 21, ctx_r0.data.skyCondiction));
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("icon", false)("skyCondition", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](22, 21, ctx_r0.locationDTO.skyCondiction));
         }
       }
 
@@ -1604,19 +1810,17 @@
         _createClass(LocationComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this6 = this;
 
             this.weatherService.getLocationByZipCode(this.zipCode).subscribe(function (data) {
-              return _this4.data = data;
+              return _this6.locationDTO = data;
             }, function (error) {
-              _this4.weatherService.setZipCodeNotFound(error.message);
+              _this6.weatherService.setZipCodeNotFound(error.message);
 
               setTimeout(function () {
-                return _this4.weatherService.setZipCodeNotFound();
+                return _this6.weatherService.setZipCodeNotFound();
               }, 2000);
             });
-            var t = this.weatherService.getZipCodesValue;
-            console.log(t);
           }
         }, {
           key: "removeLocation",
@@ -1647,7 +1851,7 @@
           }
 
           if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.data);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.locationDTO);
           }
         },
         directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLinkWithHref"], _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_4__["WeatherIconComponent"]],
@@ -1921,6 +2125,12 @@
       var _app_guards_can_load_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @app/guards/can-load.guard */
       "2KAn");
+      /* harmony import */
+
+
+      var _app_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! @app/interceptors/error.interceptor */
+      "Nlor");
 
       var CoreModule = /*#__PURE__*/_createClass(function CoreModule() {
         _classCallCheck(this, CoreModule);
@@ -1936,6 +2146,10 @@
         providers: [_app_services__WEBPACK_IMPORTED_MODULE_6__["WeatherService"], _app_services__WEBPACK_IMPORTED_MODULE_6__["LoadingService"], _app_guards_can_load_guard__WEBPACK_IMPORTED_MODULE_9__["CanLoadGuard"], {
           provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
           useClass: _app_interceptors_loading_interceptor__WEBPACK_IMPORTED_MODULE_5__["LoadingInterceptor"],
+          multi: true
+        }, {
+          provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
+          useClass: _app_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_10__["ErrorInterceptor"],
           multi: true
         }],
         imports: [[_angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_7__["SharedModule"]]]
@@ -1959,6 +2173,10 @@
             providers: [_app_services__WEBPACK_IMPORTED_MODULE_6__["WeatherService"], _app_services__WEBPACK_IMPORTED_MODULE_6__["LoadingService"], _app_guards_can_load_guard__WEBPACK_IMPORTED_MODULE_9__["CanLoadGuard"], {
               provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
               useClass: _app_interceptors_loading_interceptor__WEBPACK_IMPORTED_MODULE_5__["LoadingInterceptor"],
+              multi: true
+            }, {
+              provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
+              useClass: _app_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_10__["ErrorInterceptor"],
               multi: true
             }]
           }]
