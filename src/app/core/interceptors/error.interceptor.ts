@@ -19,17 +19,17 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (request.url.includes('/weather')) {
             return next.handle(request)
                 .pipe(
-                    retry(1),
                     catchError((err: HttpErrorResponse) => {
                         if (err.status === 404) {
                             const zipCode = request.url.split('zip=')[1].substring(0, 5);
                             this.weatherService.removeZipCode(zipCode);
                         }
                         return throwError(err);
-                    }));
+                    }),
+                    retry(1)
+                );
         } else {
             return next.handle(request);
         }
-
     }
 }

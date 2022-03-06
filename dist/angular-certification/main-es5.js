@@ -438,7 +438,7 @@
             var _this = this;
 
             if (request.url.includes('/weather')) {
-              return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) {
+              return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) {
                 if (err.status === 404) {
                   var zipCode = request.url.split('zip=')[1].substring(0, 5);
 
@@ -446,7 +446,7 @@
                 }
 
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(err);
-              }));
+              }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1));
             } else {
               return next.handle(request);
             }

@@ -7,15 +7,17 @@ import {LoadingService} from '@app/services';
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
 
-  constructor(
-    private readonly loadingService: LoadingService
-  ) {
+    constructor(
+        private readonly loadingService: LoadingService
+    ) {}
 
-  }
-
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.loadingService.start(req);
-    return next.handle(req).pipe(delay(300), finalize(() => this.loadingService.stop(req)));
-  }
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this.loadingService.start(req);
+        return next.handle(req)
+            .pipe(
+                delay(300),
+                finalize(() => this.loadingService.stop(req))
+            );
+    }
 
 }

@@ -204,13 +204,13 @@ class ErrorInterceptor {
     intercept(request, next) {
         if (request.url.includes('/weather')) {
             return next.handle(request)
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((err) => {
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((err) => {
                 if (err.status === 404) {
                     const zipCode = request.url.split('zip=')[1].substring(0, 5);
                     this.weatherService.removeZipCode(zipCode);
                 }
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(err);
-            }));
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1));
         }
         else {
             return next.handle(request);
@@ -351,7 +351,8 @@ class LoadingInterceptor {
     }
     intercept(req, next) {
         this.loadingService.start(req);
-        return next.handle(req).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["delay"])(300), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["finalize"])(() => this.loadingService.stop(req)));
+        return next.handle(req)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["delay"])(300), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["finalize"])(() => this.loadingService.stop(req)));
     }
 }
 LoadingInterceptor.ɵfac = function LoadingInterceptor_Factory(t) { return new (t || LoadingInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_app_services__WEBPACK_IMPORTED_MODULE_2__["LoadingService"])); };
