@@ -1,4 +1,4 @@
-<div *ngIf="locationDTO" class="container">
+<div *ngIf="locationDTO$ | async as locationDTO" class="container">
     <div class="well flex">
         <div>
             <h3>{{locationDTO.name}} ({{zipCode}})</h3>

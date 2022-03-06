@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {FullWeatherDTO, LocationDTO} from "@shared/models";
-import {filter, map, tap} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 import {$enum} from "ts-enum-util";
 import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {ForecastDTO} from "../models/forecast";
@@ -13,15 +13,9 @@ import {CityDTO} from "@shared/models/city";
 export class ForecastService {
 
     private readonly apiUrl: string;
-    private readonly locations$: BehaviorSubject<LocationDTO[]>;
 
     constructor(private readonly http: HttpClient) {
         this.apiUrl = environment.API_URL;
-        this.locations$ = new BehaviorSubject<LocationDTO[]>([]);
-    }
-
-    get getLocations(): Observable<LocationDTO[]> {
-        return this.locations$.asObservable();
     }
 
     getFiveDayForecastByZipCode(zipCode: string): Observable<LocationDTO[]> {
@@ -29,8 +23,7 @@ export class ForecastService {
         return this.http.get<ForecastDTO>(url)
             .pipe(
                 filter(({list}) => !!list.length),
-                map(({list, city}) => this.mapToLocationDTO(list, city)),
-                tap((locations: LocationDTO[]) => this.locations$.next(locations))
+                map(({list, city}) => this.mapToLocationDTO(list, city))
             );
     }
 

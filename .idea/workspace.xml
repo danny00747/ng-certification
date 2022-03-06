@@ -5,38 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a115339-a992-4fdd-a904-f642df6b23b1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/add-location/add-location.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/add-location/add-location.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/add-location/add-location.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/add-location/add-location.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/list-location.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/list-location.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/list-location.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/list-location.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/location/location.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/location/location.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/location/location.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/list-location/location/location.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/classes/cache.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/classes/cache.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/add-location/add-location.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/add-location/add-location.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/add-location/add-location.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/add-location/add-location.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/list-location.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/list-location.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/list-location.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/list-location.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/location/location.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/location/location.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/location/location.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/components/list-location/location/location.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/core.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/core.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/guards/can-load.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/guards/can-load.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/models/forecast.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/models/forecast.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/list-location/location/location.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/list-location/location/location.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/list-location/location/location.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/list-location/location/location.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/components/five-day-forecast/five-day-forecast.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/components/five-day-forecast/five-day-forecast.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +97,7 @@
       <workItem from="1646303187704" duration="17945000" />
       <workItem from="1646395891127" duration="72479000" />
       <workItem from="1646592085570" duration="700000" />
-      <workItem from="1646592948570" duration="980000" />
+      <workItem from="1646592948570" duration="4943000" />
     </task>
     <servers />
   </component>
