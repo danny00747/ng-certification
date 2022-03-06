@@ -17,7 +17,7 @@ export class ForecastService {
 
     constructor(private readonly http: HttpClient) {
         this.apiUrl = environment.API_URL;
-        this.locations$ = new BehaviorSubject<LocationDTO[]>([])
+        this.locations$ = new BehaviorSubject<LocationDTO[]>([]);
     }
 
     get getLocations(): Observable<LocationDTO[]> {

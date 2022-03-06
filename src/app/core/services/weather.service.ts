@@ -6,7 +6,7 @@ import {FullWeatherDTO, LocationDTO, MainWeatherDTO, WeatherDTO} from "@shared/m
 import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {$enum} from 'ts-enum-util'
 import {BehaviorSubject, Observable} from "rxjs";
-import {filter, map, tap} from "rxjs/operators";
+import {filter, map} from "rxjs/operators";
 
 
 @Injectable()
@@ -45,7 +45,6 @@ export class WeatherService extends CacheService {
         this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
         this.removeValue(this.localStoragekey, zipcode);
         this.zipCodes$.next(this.cachedZipCodes);
-
     }
 
     setZipCodeNotFound(error?: string) {

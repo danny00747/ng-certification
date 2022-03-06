@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0a115339-a992-4fdd-a904-f642df6b23b1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/components/add-location/add-location.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/components/add-location/add-location.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +94,7 @@
       <workItem from="1646259175753" duration="2753000" />
       <workItem from="1646262077213" duration="1349000" />
       <workItem from="1646303187704" duration="17945000" />
-      <workItem from="1646395891127" duration="69124000" />
+      <workItem from="1646395891127" duration="70158000" />
     </task>
     <servers />
   </component>

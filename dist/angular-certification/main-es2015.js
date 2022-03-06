@@ -133,7 +133,6 @@ class AddLocationComponent {
     onSubmit(zipCodeForm) {
         this.weatherService.addZipCode(zipCodeForm.value.zipCode);
         zipCodeForm.reset();
-        this.weatherService.getLocationByZipCode(zipCodeForm.value.zipCode);
     }
 }
 AddLocationComponent.ɵfac = function AddLocationComponent_Factory(t) { return new (t || AddLocationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_services__WEBPACK_IMPORTED_MODULE_1__["WeatherService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_services__WEBPACK_IMPORTED_MODULE_1__["LoadingService"])); };
@@ -333,18 +332,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "qCKp");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _app_classes_cache_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @app/classes/cache.service */ "Omcj");
-/* harmony import */ var _app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @app/services */ "dJ3e");
+/* harmony import */ var _app_services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @app/services */ "dJ3e");
 
 
 
 
 
 
-
-class ErrorInterceptor extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE_4__["CacheService"] {
+class ErrorInterceptor {
     constructor(weatherService) {
-        super();
         this.weatherService = weatherService;
     }
     intercept(request, next) {
@@ -363,11 +359,11 @@ class ErrorInterceptor extends _app_classes_cache_service__WEBPACK_IMPORTED_MODU
         }
     }
 }
-ErrorInterceptor.ɵfac = function ErrorInterceptor_Factory(t) { return new (t || ErrorInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_app_services__WEBPACK_IMPORTED_MODULE_5__["WeatherService"])); };
+ErrorInterceptor.ɵfac = function ErrorInterceptor_Factory(t) { return new (t || ErrorInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_app_services__WEBPACK_IMPORTED_MODULE_4__["WeatherService"])); };
 ErrorInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: ErrorInterceptor, factory: ErrorInterceptor.ɵfac });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ErrorInterceptor, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"]
-    }], function () { return [{ type: _app_services__WEBPACK_IMPORTED_MODULE_5__["WeatherService"] }]; }, null); })();
+    }], function () { return [{ type: _app_services__WEBPACK_IMPORTED_MODULE_4__["WeatherService"] }]; }, null); })();
 
 
 /***/ }),

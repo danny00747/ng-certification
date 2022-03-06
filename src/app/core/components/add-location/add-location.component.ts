@@ -22,6 +22,5 @@ export class AddLocationComponent implements OnInit {
     onSubmit(zipCodeForm: NgForm): void {
         this.weatherService.addZipCode(zipCodeForm.value.zipCode);
         zipCodeForm.reset();
-        this.weatherService.getLocationByZipCode(zipCodeForm.value.zipCode);
     }
 }

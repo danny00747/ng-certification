@@ -9,13 +9,11 @@ import {
 } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, filter, tap} from 'rxjs/operators';
-import {CacheService} from "@app/classes/cache.service";
 import {WeatherService} from "@app/services";
 
 @Injectable()
-export class ErrorInterceptor extends CacheService implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
     constructor(private readonly weatherService: WeatherService) {
-        super();
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
