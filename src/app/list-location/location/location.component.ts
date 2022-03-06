@@ -1,9 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LocationDTO} from "@shared/models";
 import {WeatherService} from "@app/services";
-import {HttpErrorResponse} from "@angular/common/http";
-import {Observable, of} from "rxjs";
-import {catchError} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-location',
@@ -20,13 +18,7 @@ export class LocationComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.locationDTO$ = this.weatherService.getLocationByZipCode(this.zipCode)
-            .pipe(
-                catchError((error: HttpErrorResponse) => {
-                    this.weatherService.setZipCodeNotFound(error.message);
-                    setTimeout(() => this.weatherService.setZipCodeNotFound(), 2000);
-                    return of(null);
-                }));
+        this.locationDTO$ = this.weatherService.getLocationByZipCode(this.zipCode);
     }
 
     removeLocation(): void {

@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "@environments/environment";
 import {CacheService} from "@app/classes/cache.service";
 import {FullWeatherDTO, LocationDTO, MainWeatherDTO, WeatherDTO} from "@shared/models";
 import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {$enum} from 'ts-enum-util'
-import {BehaviorSubject, Observable} from "rxjs";
-import {filter, map} from "rxjs/operators";
+import {BehaviorSubject, Observable, of} from "rxjs";
+import {catchError, filter, map} from "rxjs/operators";
 
 
 @Injectable()
@@ -53,10 +53,6 @@ export class WeatherService extends CacheService {
         }
     }
 
-    setZipCodeNotFound(error?: string) {
-        this.zipCodeNotFound$.next(error);
-    }
-
     checkDuplicateZipCode(zipCode: string): boolean {
         return this.cachedZipCodes.indexOf(zipCode) === -1;
     }
@@ -72,7 +68,13 @@ export class WeatherService extends CacheService {
         return this.http.get<FullWeatherDTO>(url)
             .pipe(
                 filter(({weather}: FullWeatherDTO) => !!weather),
-                map(({weather, main, name}) => this.mapToLocationDTO(weather, main, name)));
+                map(({weather, main, name}) => this.mapToLocationDTO(weather, main, name)),
+                catchError((error: HttpErrorResponse) => {
+                    this.zipCodeNotFound$.next(error.message);
+                    setTimeout(() => this.zipCodeNotFound$.next(null), 2000);
+                    return of(null);
+                })
+            );
     }
 
     private mapToLocationDTO = (weather: WeatherDTO[], main: MainWeatherDTO, name: string) =>

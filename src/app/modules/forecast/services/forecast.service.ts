@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {FullWeatherDTO, LocationDTO} from "@shared/models";
-import {filter, map} from "rxjs/operators";
+import {catchError, filter, map} from "rxjs/operators";
 import {$enum} from "ts-enum-util";
 import {SkyStatusEnum} from "@shared/enums/sky-condiction.enum";
 import {ForecastDTO} from "../models/forecast";
@@ -23,7 +23,8 @@ export class ForecastService {
         return this.http.get<ForecastDTO>(url)
             .pipe(
                 filter(({list}) => !!list.length),
-                map(({list, city}) => this.mapToLocationDTO(list, city))
+                map(({list, city}) => this.mapToLocationDTO(list, city)),
+                catchError(() => of([]))
             );
     }
 

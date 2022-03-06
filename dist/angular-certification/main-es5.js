@@ -827,43 +827,31 @@
       /* harmony import */
 
 
-      var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! rxjs/operators */
-      "kU1M");
-      /* harmony import */
-
-
-      var _app_services__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _app_services__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! @app/services */
       "dJ3e");
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! @angular/common */
       "ofXK");
       /* harmony import */
 
 
-      var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/router */
       "tyNb");
       /* harmony import */
 
 
-      var _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ../../shared/components/weather-icon/weather-icon.component */
       "cJ/H");
       /* harmony import */
 
 
-      var _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../../shared/pipes/weather-status.pipe */
       "hQe8");
 
@@ -995,16 +983,7 @@
         _createClass(LocationComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this3 = this;
-
-            this.locationDTO$ = this.weatherService.getLocationByZipCode(this.zipCode).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (error) {
-              _this3.weatherService.setZipCodeNotFound(error.message);
-
-              setTimeout(function () {
-                return _this3.weatherService.setZipCodeNotFound();
-              }, 2000);
-              return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["of"])(null);
-            }));
+            this.locationDTO$ = this.weatherService.getLocationByZipCode(this.zipCode);
           }
         }, {
           key: "removeLocation",
@@ -1017,7 +996,7 @@
       }();
 
       LocationComponent.ɵfac = function LocationComponent_Factory(t) {
-        return new (t || LocationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_services__WEBPACK_IMPORTED_MODULE_3__["WeatherService"]));
+        return new (t || LocationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_app_services__WEBPACK_IMPORTED_MODULE_1__["WeatherService"]));
       };
 
       LocationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -1040,8 +1019,8 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](1, 1, ctx.locationDTO$));
           }
         },
-        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterLinkWithHref"], _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_6__["WeatherIconComponent"]],
-        pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["AsyncPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_4__["DecimalPipe"], _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_7__["WeatherStatusPipe"]],
+        directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLinkWithHref"], _shared_components_weather_icon_weather_icon_component__WEBPACK_IMPORTED_MODULE_4__["WeatherIconComponent"]],
+        pipes: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["AsyncPipe"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["TitleCasePipe"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["DecimalPipe"], _shared_pipes_weather_status_pipe__WEBPACK_IMPORTED_MODULE_5__["WeatherStatusPipe"]],
         styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2xpc3QtbG9jYXRpb24vbG9jYXRpb24vbG9jYXRpb24uY29tcG9uZW50LmNzcyJ9 */"]
       });
       /*@__PURE__*/
@@ -1056,7 +1035,7 @@
           }]
         }], function () {
           return [{
-            type: _app_services__WEBPACK_IMPORTED_MODULE_3__["WeatherService"]
+            type: _app_services__WEBPACK_IMPORTED_MODULE_1__["WeatherService"]
           }];
         }, {
           zipCode: [{
@@ -1228,16 +1207,16 @@
         var _super = _createSuper(WeatherService);
 
         function WeatherService(http) {
-          var _this4;
+          var _this3;
 
           _classCallCheck(this, WeatherService);
 
           var _a, _b;
 
-          _this4 = _super.call(this);
-          _this4.http = http;
+          _this3 = _super.call(this);
+          _this3.http = http;
 
-          _this4.mapToLocationDTO = function (weather, main, name) {
+          _this3.mapToLocationDTO = function (weather, main, name) {
             return {
               name: name,
               skyCondiction: Object(ts_enum_util__WEBPACK_IMPORTED_MODULE_4__["$enum"])(_shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_3__["SkyStatusEnum"]).asValueOrDefault(weather[0].main.toLocaleLowerCase(), _shared_enums_sky_condiction_enum__WEBPACK_IMPORTED_MODULE_3__["SkyStatusEnum"].DEFAuLT),
@@ -1247,15 +1226,15 @@
             };
           };
 
-          _this4.localStoragekey = 'ZIPCODES';
-          _this4.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
-          _this4.zipCodes$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
-          _this4.cachedZipCodes = (_b = (_a = _this4.getItem(_this4.localStoragekey)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
+          _this3.localStoragekey = 'ZIPCODES';
+          _this3.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
+          _this3.zipCodes$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
+          _this3.cachedZipCodes = (_b = (_a = _this3.getItem(_this3.localStoragekey)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
 
-          _this4.zipCodes$.next(_this4.cachedZipCodes);
+          _this3.zipCodes$.next(_this3.cachedZipCodes);
 
-          _this4.zipCodeNotFound$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](null);
-          return _this4;
+          _this3.zipCodeNotFound$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](null);
+          return _this3;
         }
 
         _createClass(WeatherService, [{
@@ -1287,11 +1266,6 @@
             }
           }
         }, {
-          key: "setZipCodeNotFound",
-          value: function setZipCodeNotFound(error) {
-            this.zipCodeNotFound$.next(error);
-          }
-        }, {
           key: "checkDuplicateZipCode",
           value: function checkDuplicateZipCode(zipCode) {
             return this.cachedZipCodes.indexOf(zipCode) === -1;
@@ -1306,7 +1280,7 @@
         }, {
           key: "getLocationByZipCode",
           value: function getLocationByZipCode(zipCode) {
-            var _this5 = this;
+            var _this4 = this;
 
             var url = "".concat(this.apiUrl, "weather?zip=").concat(zipCode, ",us&appid=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY);
             return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(function (_ref) {
@@ -1316,7 +1290,14 @@
               var weather = _ref2.weather,
                   main = _ref2.main,
                   name = _ref2.name;
-              return _this5.mapToLocationDTO(weather, main, name);
+              return _this4.mapToLocationDTO(weather, main, name);
+            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(function (error) {
+              _this4.zipCodeNotFound$.next(error.message);
+
+              setTimeout(function () {
+                return _this4.zipCodeNotFound$.next(null);
+              }, 2000);
+              return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(null);
             }));
           }
         }]);

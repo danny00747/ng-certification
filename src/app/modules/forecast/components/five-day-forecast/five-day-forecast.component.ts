@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ForecastService} from "../../services/forecast.service";
 import {ActivatedRoute} from "@angular/router";
-import {catchError, filter, switchMap} from "rxjs/operators";
-import {Observable, of} from "rxjs";
+import {filter, switchMap} from "rxjs/operators";
+import {Observable} from "rxjs";
 import {LocationDTO} from "@shared/models";
 
 @Component({
@@ -14,8 +14,7 @@ export class FiveDayForecastComponent {
 
     locations$: Observable<LocationDTO[]> = this.route.params.pipe(
         filter(params => !!params.id),
-        switchMap(params => this.forecastService.getFiveDayForecastByZipCode(params.id)),
-        catchError(() => of([]))
+        switchMap(params => this.forecastService.getFiveDayForecastByZipCode(params.id))
     );
 
     constructor(
