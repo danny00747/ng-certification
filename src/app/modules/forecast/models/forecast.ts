@@ -1,5 +1,5 @@
-import {FullWeatherDTO} from "@shared/models/weather.model.";
-import {CityDTO} from "@shared/models/city";
+import {FullWeatherDTO} from "@shared/models";
+import {CityDTO} from "@shared/models";
 
 export interface ForecastDTO {
     cod: string;

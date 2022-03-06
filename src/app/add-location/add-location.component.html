@@ -1,4 +1,4 @@
-<div class=" container">
+<div class="container">
     <div class="card">
         <div class="card-header font-weight-bold">
             Enter a zipcode:
@@ -11,7 +11,7 @@
                        pattern="^[0-9]*$"
                        class="form-control" name="zipCode" type="text" id="addLocation"
                        [(ngModel)]="zipCode" minlength="5" maxlength="5"
-                       placeholder="zipCode" required>
+                       placeholder="Enter a zipcode  e.g: 95742" required>
                 <div *ngIf="zipCodeInput.errors && (zipCodeInput.invalid || zipCodeInput.touched)">
                     <small id="zipCodeError2" class="text-danger"
                            *ngIf="zipCodeInput.errors.pattern || zipCodeInput.errors.minlength">
@@ -33,7 +33,7 @@
 
                 <div id="zipCodeError5" class="alert alert-danger" role="alert"
                      *ngIf="(zipCodeNotFound$ | async)">
-                    This zipcode has not been found !!
+                    This zipcode has not been found !
                 </div>
 
 

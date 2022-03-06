@@ -4,11 +4,10 @@ import {
     HttpHandler,
     HttpEvent,
     HttpInterceptor,
-    HttpResponse,
     HttpErrorResponse
 } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {catchError, filter, tap} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 import {WeatherService} from "@app/services";
 
 @Injectable()
@@ -20,8 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (request.url.includes('/weather')) {
             return next.handle(request)
                 .pipe(
-                    filter((event: HttpEvent<any>) => event instanceof HttpResponse && event.status === 200),
-                    tap(() => this.weatherService.setZipCodeNotFound(null)),
+                    retry(1),
                     catchError((err: HttpErrorResponse) => {
                         if (err.status === 404) {
                             const zipCode = request.url.split('zip=')[1].substring(0, 5);

@@ -11,7 +11,6 @@ export class CanLoadGuard implements CanLoad {
     ) {
     }
 
-
     async canLoad(): Promise<boolean> {
         if (this.weatherService.getZipCodesValue.length > 0) {
             return true
