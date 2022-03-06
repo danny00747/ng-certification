@@ -8,7 +8,7 @@ export abstract class CacheService {
     }
 
     protected removeItem(key: string) {
-        localStorage.removeItem(key)
+        localStorage.removeItem(key);
     }
 
     protected removeValue(key: string, value: string) {
@@ -18,6 +18,6 @@ export abstract class CacheService {
     }
 
     protected clear() {
-        localStorage.clear()
+        localStorage.clear();
     }
 }
