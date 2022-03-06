@@ -640,7 +640,7 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
         return this.zipCodeNotFound$.asObservable();
     }
     removeZipCode(zipcode) {
-        if (this.cachedZipCodes.indexOf(zipcode) === this.cachedZipCodes.length - 1 && this.cachedZipCodes.length === 1) {
+        if (this.cachedZipCodes.length === 1) {
             this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
             this.zipCodes$.next(this.cachedZipCodes);
             this.clear();

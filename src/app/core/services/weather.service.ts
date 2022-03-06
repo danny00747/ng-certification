@@ -42,7 +42,7 @@ export class WeatherService extends CacheService {
     }
 
     removeZipCode(zipcode: string) {
-        if (this.cachedZipCodes.indexOf(zipcode) === this.cachedZipCodes.length - 1 && this.cachedZipCodes.length === 1) {
+        if (this.cachedZipCodes.length === 1) {
             this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
             this.zipCodes$.next(this.cachedZipCodes);
             this.clear();
