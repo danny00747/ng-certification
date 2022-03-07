@@ -84,8 +84,13 @@ class ForecastService {
         this.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
     }
     getFiveDayForecastByZipCode(zipCode) {
-        const url = `${this.apiUrl}forecast/daily?cnt=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].NUMBER_OF_DAYS}&zip=${zipCode},us&appid=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY}`;
-        return this.http.get(url)
+        return this.http.get(`${this.apiUrl}/forecast/daily`, {
+            params: {
+                cnt: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].NUMBER_OF_DAYS.toString(),
+                zip: zipCode,
+                appid: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY
+            }
+        })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(({ list }) => !!list.length), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(({ list, city }) => this.mapToLocationDTO(list, city)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(() => Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])([])));
     }
 }
@@ -147,7 +152,7 @@ class FiveDayForecastComponent {
     constructor(forecastService, route) {
         this.forecastService = forecastService;
         this.route = route;
-        this.locations$ = this.route.params.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["filter"])(params => !!params.id), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["switchMap"])(params => this.forecastService.getFiveDayForecastByZipCode(params.id)));
+        this.locations$ = this.route.params.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["filter"])(params => !!params.zipCode), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["switchMap"])(params => this.forecastService.getFiveDayForecastByZipCode(params.zipCode)));
     }
 }
 FiveDayForecastComponent.ɵfac = function FiveDayForecastComponent_Factory(t) { return new (t || FiveDayForecastComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_forecast_service__WEBPACK_IMPORTED_MODULE_2__["ForecastService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"])); };
@@ -217,7 +222,7 @@ class CanActivateGuard {
     }
     canActivate(route) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            if (this.weatherService.getZipCodesValue.includes(route.paramMap.get('id'))) {
+            if (this.weatherService.getZipCodesValue.includes(route.paramMap.get('zipCode'))) {
                 return true;
             }
             else {
@@ -258,7 +263,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     { path: '', pathMatch: 'full', redirectTo: '/' },
-    { path: ':id', component: _components_five_day_forecast_five_day_forecast_component__WEBPACK_IMPORTED_MODULE_2__["FiveDayForecastComponent"], canActivate: [_guards_can_activate_guard__WEBPACK_IMPORTED_MODULE_3__["CanActivateGuard"]] }
+    { path: ':zipCode', component: _components_five_day_forecast_five_day_forecast_component__WEBPACK_IMPORTED_MODULE_2__["FiveDayForecastComponent"], canActivate: [_guards_can_activate_guard__WEBPACK_IMPORTED_MODULE_3__["CanActivateGuard"]] }
 ];
 class ForecastRoutingModule {
 }

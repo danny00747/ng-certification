@@ -12,7 +12,7 @@ export class CanActivateGuard implements CanActivate {
     }
 
     async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-        if (this.weatherService.getZipCodesValue.includes(route.paramMap.get('id'))) {
+        if (this.weatherService.getZipCodesValue.includes(route.paramMap.get('zipCode'))) {
             return true
         } else {
             await this.router.navigate(['/']);

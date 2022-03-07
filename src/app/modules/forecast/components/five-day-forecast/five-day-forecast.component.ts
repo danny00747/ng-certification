@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ForecastService} from "../../services/forecast.service";
 import {ActivatedRoute} from "@angular/router";
-import {filter, switchMap} from "rxjs/operators";
+import {filter, switchMap, tap} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {LocationDTO} from "@shared/models";
 
@@ -13,8 +13,8 @@ import {LocationDTO} from "@shared/models";
 export class FiveDayForecastComponent {
 
     locations$: Observable<LocationDTO[]> = this.route.params.pipe(
-        filter(params => !!params.id),
-        switchMap(params => this.forecastService.getFiveDayForecastByZipCode(params.id))
+        filter(params => !!params.zipCode),
+        switchMap(params => this.forecastService.getFiveDayForecastByZipCode(params.zipCode))
     );
 
     constructor(

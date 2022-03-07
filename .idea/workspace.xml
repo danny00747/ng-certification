@@ -6,8 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="0a115339-a992-4fdd-a904-f642df6b23b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/main-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/main-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/main-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/main-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/main-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/angular-certification/modules-forecast-forecast-module-es5.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/components/five-day-forecast/five-day-forecast.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/components/five-day-forecast/five-day-forecast.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/forecast-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/forecast-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/guards/can-activate.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/guards/can-activate.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/modules/forecast/services/forecast.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +107,7 @@
       <workItem from="1646303187704" duration="17945000" />
       <workItem from="1646395891127" duration="72479000" />
       <workItem from="1646592085570" duration="700000" />
-      <workItem from="1646592948570" duration="9494000" />
+      <workItem from="1646592948570" duration="13221000" />
     </task>
     <servers />
   </component>

@@ -72,7 +72,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false,
-    API_URL: `https://api.openweathermap.org/data/2.5/`,
+    API_URL: `https://api.openweathermap.org/data/2.5`,
     API_KEY: `5a4b2d457ecbef9eb2a71e480b947604`,
     ICON_URL: `https://www.angulartraining.com/images/weather/`,
     NUMBER_OF_DAYS: 5
@@ -206,8 +206,7 @@ class ErrorInterceptor {
             return next.handle(request)
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((err) => {
                 if (err.status === 404) {
-                    const zipCode = request.url.split('zip=')[1].substring(0, 5);
-                    this.weatherService.removeZipCode(zipCode);
+                    this.weatherService.removeZipCode(request.params.get('zip'));
                     this.weatherService.displayError(err.message);
                 }
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(err);
@@ -593,10 +592,9 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
             minTemp: main.temp_min,
             maxTemp: main.temp_max
         });
-        this.localStoragekey = 'ZIPCODES';
         this.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
         this.zipCodes$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
-        this.cachedZipCodes = (_b = (_a = this.getItem(this.localStoragekey)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
+        this.cachedZipCodes = (_b = (_a = this.getItem(WeatherService.LOCAL_STORAGE_KEY)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
         this.zipCodes$.next(this.cachedZipCodes);
         this.zipCodeNotFound$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](null);
     }
@@ -611,12 +609,16 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
     }
     addZipCode(zipCode) {
         this.cachedZipCodes.push(zipCode);
-        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+        this.setItem(WeatherService.LOCAL_STORAGE_KEY, this.cachedZipCodes.toString());
         this.zipCodes$.next(this.cachedZipCodes);
     }
     getLocationByZipCode(zipCode) {
-        const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY}`;
-        return this.http.get(url)
+        return this.http.get(`${this.apiUrl}/weather`, {
+            params: {
+                zip: zipCode,
+                appid: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY
+            }
+        })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(({ weather }) => !!weather), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(({ weather, main, name }) => this.mapToLocationDTO(weather, main, name)));
     }
     displayError(error) {
@@ -631,7 +633,7 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
         }
         else {
             this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
-            this.removeValue(this.localStoragekey, zipcode);
+            this.removeValue(WeatherService.LOCAL_STORAGE_KEY, zipcode);
             this.zipCodes$.next(this.cachedZipCodes);
         }
     }
@@ -639,6 +641,7 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
         return this.cachedZipCodes.indexOf(zipCode) === -1;
     }
 }
+WeatherService.LOCAL_STORAGE_KEY = 'ZIPCODES';
 WeatherService.ɵfac = function WeatherService_Factory(t) { return new (t || WeatherService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"])); };
 WeatherService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: WeatherService, factory: WeatherService.ɵfac });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](WeatherService, [{

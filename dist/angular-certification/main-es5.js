@@ -173,7 +173,7 @@
 
       var environment = {
         production: false,
-        API_URL: "https://api.openweathermap.org/data/2.5/",
+        API_URL: "https://api.openweathermap.org/data/2.5",
         API_KEY: "5a4b2d457ecbef9eb2a71e480b947604",
         ICON_URL: "https://www.angulartraining.com/images/weather/",
         NUMBER_OF_DAYS: 5
@@ -440,9 +440,7 @@
             if (request.url.includes('/weather')) {
               return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (err) {
                 if (err.status === 404) {
-                  var zipCode = request.url.split('zip=')[1].substring(0, 5);
-
-                  _this.weatherService.removeZipCode(zipCode);
+                  _this.weatherService.removeZipCode(request.params.get('zip'));
 
                   _this.weatherService.displayError(err.message);
                 }
@@ -1228,10 +1226,9 @@
             };
           };
 
-          _this3.localStoragekey = 'ZIPCODES';
           _this3.apiUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_URL;
           _this3.zipCodes$ = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"]([]);
-          _this3.cachedZipCodes = (_b = (_a = _this3.getItem(_this3.localStoragekey)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
+          _this3.cachedZipCodes = (_b = (_a = _this3.getItem(WeatherService.LOCAL_STORAGE_KEY)) === null || _a === void 0 ? void 0 : _a.split(',')) !== null && _b !== void 0 ? _b : [];
 
           _this3.zipCodes$.next(_this3.cachedZipCodes);
 
@@ -1258,7 +1255,7 @@
           key: "addZipCode",
           value: function addZipCode(zipCode) {
             this.cachedZipCodes.push(zipCode);
-            this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+            this.setItem(WeatherService.LOCAL_STORAGE_KEY, this.cachedZipCodes.toString());
             this.zipCodes$.next(this.cachedZipCodes);
           }
         }, {
@@ -1266,8 +1263,12 @@
           value: function getLocationByZipCode(zipCode) {
             var _this4 = this;
 
-            var url = "".concat(this.apiUrl, "weather?zip=").concat(zipCode, ",us&appid=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY);
-            return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(function (_ref) {
+            return this.http.get("".concat(this.apiUrl, "/weather"), {
+              params: {
+                zip: zipCode,
+                appid: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY
+              }
+            }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(function (_ref) {
               var weather = _ref.weather;
               return !!weather;
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (_ref2) {
@@ -1296,7 +1297,7 @@
               this.clear();
             } else {
               this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
-              this.removeValue(this.localStoragekey, zipcode);
+              this.removeValue(WeatherService.LOCAL_STORAGE_KEY, zipcode);
               this.zipCodes$.next(this.cachedZipCodes);
             }
           }
@@ -1309,6 +1310,8 @@
 
         return WeatherService;
       }(_app_classes_cache_service__WEBPACK_IMPORTED_MODULE_2__["CacheService"]);
+
+      WeatherService.LOCAL_STORAGE_KEY = 'ZIPCODES';
 
       WeatherService.ɵfac = function WeatherService_Factory(t) {
         return new (t || WeatherService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]));

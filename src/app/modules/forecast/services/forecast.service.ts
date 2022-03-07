@@ -19,8 +19,13 @@ export class ForecastService {
     }
 
     getFiveDayForecastByZipCode(zipCode: string): Observable<LocationDTO[]> {
-        const url = `${this.apiUrl}forecast/daily?cnt=${environment.NUMBER_OF_DAYS}&zip=${zipCode},us&appid=${environment.API_KEY}`;
-        return this.http.get<ForecastDTO>(url)
+        return this.http.get<ForecastDTO>(`${this.apiUrl}/forecast/daily`, {
+            params: {
+                cnt: environment.NUMBER_OF_DAYS.toString(),
+                zip: zipCode,
+                appid: environment.API_KEY
+            }
+        })
             .pipe(
                 filter(({list}) => !!list.length),
                 map(({list, city}) => this.mapToLocationDTO(list, city)),

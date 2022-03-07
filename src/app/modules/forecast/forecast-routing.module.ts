@@ -5,7 +5,7 @@ import {CanActivateGuard} from "./guards/can-activate.guard";
 
 const routes: Routes = [
     {path: '', pathMatch: 'full', redirectTo: '/'},
-    {path: ':id', component: FiveDayForecastComponent, canActivate: [CanActivateGuard]}
+    {path: ':zipCode', component: FiveDayForecastComponent, canActivate: [CanActivateGuard]}
 ];
 
 @NgModule({

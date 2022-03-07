@@ -188,8 +188,13 @@
           value: function getFiveDayForecastByZipCode(zipCode) {
             var _this = this;
 
-            var url = "".concat(this.apiUrl, "forecast/daily?cnt=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].NUMBER_OF_DAYS, "&zip=").concat(zipCode, ",us&appid=").concat(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY);
-            return this.http.get(url).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (_ref) {
+            return this.http.get("".concat(this.apiUrl, "/forecast/daily"), {
+              params: {
+                cnt: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].NUMBER_OF_DAYS.toString(),
+                zip: zipCode,
+                appid: _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY
+              }
+            }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (_ref) {
               var list = _ref.list;
               return !!list.length;
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref2) {
@@ -342,9 +347,9 @@
         this.forecastService = forecastService;
         this.route = route;
         this.locations$ = this.route.params.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["filter"])(function (params) {
-          return !!params.id;
+          return !!params.zipCode;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["switchMap"])(function (params) {
-          return _this2.forecastService.getFiveDayForecastByZipCode(params.id);
+          return _this2.forecastService.getFiveDayForecastByZipCode(params.zipCode);
         }));
       });
 
@@ -499,7 +504,7 @@
                 while (1) {
                   switch (_context.prev = _context.next) {
                     case 0:
-                      if (!this.weatherService.getZipCodesValue.includes(route.paramMap.get('id'))) {
+                      if (!this.weatherService.getZipCodesValue.includes(route.paramMap.get('zipCode'))) {
                         _context.next = 4;
                         break;
                       }
@@ -600,7 +605,7 @@
         pathMatch: 'full',
         redirectTo: '/'
       }, {
-        path: ':id',
+        path: ':zipCode',
         component: _components_five_day_forecast_five_day_forecast_component__WEBPACK_IMPORTED_MODULE_2__["FiveDayForecastComponent"],
         canActivate: [_guards_can_activate_guard__WEBPACK_IMPORTED_MODULE_3__["CanActivateGuard"]]
       }];
