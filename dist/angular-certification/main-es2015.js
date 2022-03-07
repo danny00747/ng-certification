@@ -208,6 +208,7 @@ class ErrorInterceptor {
                 if (err.status === 404) {
                     const zipCode = request.url.split('zip=')[1].substring(0, 5);
                     this.weatherService.removeZipCode(zipCode);
+                    this.weatherService.displayError(err.message);
                 }
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(err);
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["retry"])(1));
@@ -608,6 +609,20 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
     get getZipCodeNotFound() {
         return this.zipCodeNotFound$.asObservable();
     }
+    addZipCode(zipCode) {
+        this.cachedZipCodes.push(zipCode);
+        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+        this.zipCodes$.next(this.cachedZipCodes);
+    }
+    getLocationByZipCode(zipCode) {
+        const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY}`;
+        return this.http.get(url)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(({ weather }) => !!weather), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(({ weather, main, name }) => this.mapToLocationDTO(weather, main, name)));
+    }
+    displayError(error) {
+        this.zipCodeNotFound$.next(error);
+        setTimeout(() => this.zipCodeNotFound$.next(null), 2000);
+    }
     removeZipCode(zipcode) {
         if (this.cachedZipCodes.length === 1) {
             this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
@@ -622,20 +637,6 @@ class WeatherService extends _app_classes_cache_service__WEBPACK_IMPORTED_MODULE
     }
     checkDuplicateZipCode(zipCode) {
         return this.cachedZipCodes.indexOf(zipCode) === -1;
-    }
-    addZipCode(zipCode) {
-        this.cachedZipCodes.push(zipCode);
-        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
-        this.zipCodes$.next(this.cachedZipCodes);
-    }
-    getLocationByZipCode(zipCode) {
-        const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].API_KEY}`;
-        return this.http.get(url)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["filter"])(({ weather }) => !!weather), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(({ weather, main, name }) => this.mapToLocationDTO(weather, main, name)), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])((error) => {
-            this.zipCodeNotFound$.next(error.message);
-            setTimeout(() => this.zipCodeNotFound$.next(null), 2000);
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(null);
-        }));
     }
 }
 WeatherService.ɵfac = function WeatherService_Factory(t) { return new (t || WeatherService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"])); };

@@ -443,6 +443,8 @@
                   var zipCode = request.url.split('zip=')[1].substring(0, 5);
 
                   _this.weatherService.removeZipCode(zipCode);
+
+                  _this.weatherService.displayError(err.message);
                 }
 
                 return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(err);
@@ -1253,24 +1255,6 @@
             return this.zipCodeNotFound$.asObservable();
           }
         }, {
-          key: "removeZipCode",
-          value: function removeZipCode(zipcode) {
-            if (this.cachedZipCodes.length === 1) {
-              this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
-              this.zipCodes$.next(this.cachedZipCodes);
-              this.clear();
-            } else {
-              this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
-              this.removeValue(this.localStoragekey, zipcode);
-              this.zipCodes$.next(this.cachedZipCodes);
-            }
-          }
-        }, {
-          key: "checkDuplicateZipCode",
-          value: function checkDuplicateZipCode(zipCode) {
-            return this.cachedZipCodes.indexOf(zipCode) === -1;
-          }
-        }, {
           key: "addZipCode",
           value: function addZipCode(zipCode) {
             this.cachedZipCodes.push(zipCode);
@@ -1291,14 +1275,35 @@
                   main = _ref2.main,
                   name = _ref2.name;
               return _this4.mapToLocationDTO(weather, main, name);
-            }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(function (error) {
-              _this4.zipCodeNotFound$.next(error.message);
-
-              setTimeout(function () {
-                return _this4.zipCodeNotFound$.next(null);
-              }, 2000);
-              return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["of"])(null);
             }));
+          }
+        }, {
+          key: "displayError",
+          value: function displayError(error) {
+            var _this5 = this;
+
+            this.zipCodeNotFound$.next(error);
+            setTimeout(function () {
+              return _this5.zipCodeNotFound$.next(null);
+            }, 2000);
+          }
+        }, {
+          key: "removeZipCode",
+          value: function removeZipCode(zipcode) {
+            if (this.cachedZipCodes.length === 1) {
+              this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
+              this.zipCodes$.next(this.cachedZipCodes);
+              this.clear();
+            } else {
+              this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
+              this.removeValue(this.localStoragekey, zipcode);
+              this.zipCodes$.next(this.cachedZipCodes);
+            }
+          }
+        }, {
+          key: "checkDuplicateZipCode",
+          value: function checkDuplicateZipCode(zipCode) {
+            return this.cachedZipCodes.indexOf(zipCode) === -1;
           }
         }]);
 

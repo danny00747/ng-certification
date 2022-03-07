@@ -23,6 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         if (err.status === 404) {
                             const zipCode = request.url.split('zip=')[1].substring(0, 5);
                             this.weatherService.removeZipCode(zipCode);
+                            this.weatherService.displayError(err.message);
                         }
                         return throwError(err);
                     }),

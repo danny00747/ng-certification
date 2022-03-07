@@ -41,6 +41,26 @@ export class WeatherService extends CacheService {
         return this.zipCodeNotFound$.asObservable();
     }
 
+    addZipCode(zipCode: string): void {
+        this.cachedZipCodes.push(zipCode);
+        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
+        this.zipCodes$.next(this.cachedZipCodes);
+    }
+
+    getLocationByZipCode(zipCode: string): Observable<LocationDTO> {
+        const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${environment.API_KEY}`;
+        return this.http.get<FullWeatherDTO>(url)
+            .pipe(
+                filter(({weather}: FullWeatherDTO) => !!weather),
+                map(({weather, main, name}) => this.mapToLocationDTO(weather, main, name))
+            );
+    }
+
+    displayError(error: string) {
+        this.zipCodeNotFound$.next(error);
+        setTimeout(() => this.zipCodeNotFound$.next(null), 2000);
+    }
+
     removeZipCode(zipcode: string) {
         if (this.cachedZipCodes.length === 1) {
             this.cachedZipCodes.splice(this.cachedZipCodes.indexOf(zipcode), 1);
@@ -55,26 +75,6 @@ export class WeatherService extends CacheService {
 
     checkDuplicateZipCode(zipCode: string): boolean {
         return this.cachedZipCodes.indexOf(zipCode) === -1;
-    }
-
-    addZipCode(zipCode: string): void {
-        this.cachedZipCodes.push(zipCode);
-        this.setItem(this.localStoragekey, this.cachedZipCodes.toString());
-        this.zipCodes$.next(this.cachedZipCodes);
-    }
-
-    getLocationByZipCode(zipCode: string): Observable<LocationDTO> {
-        const url = `${this.apiUrl}weather?zip=${zipCode},us&appid=${environment.API_KEY}`;
-        return this.http.get<FullWeatherDTO>(url)
-            .pipe(
-                filter(({weather}: FullWeatherDTO) => !!weather),
-                map(({weather, main, name}) => this.mapToLocationDTO(weather, main, name)),
-                catchError((error: HttpErrorResponse) => {
-                    this.zipCodeNotFound$.next(error.message);
-                    setTimeout(() => this.zipCodeNotFound$.next(null), 2000);
-                    return of(null);
-                })
-            );
     }
 
     private mapToLocationDTO = (weather: WeatherDTO[], main: MainWeatherDTO, name: string) =>

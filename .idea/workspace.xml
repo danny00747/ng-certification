@@ -7,7 +7,7 @@
     <list default="true" id="0a115339-a992-4fdd-a904-f642df6b23b1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/interceptors/error.interceptor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/core/interceptors/loading.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/interceptors/loading.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/core/services/weather.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,7 @@
       <workItem from="1646303187704" duration="17945000" />
       <workItem from="1646395891127" duration="72479000" />
       <workItem from="1646592085570" duration="700000" />
-      <workItem from="1646592948570" duration="7488000" />
+      <workItem from="1646592948570" duration="9494000" />
     </task>
     <servers />
   </component>
